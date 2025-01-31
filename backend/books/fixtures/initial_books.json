@@ -1,0 +1,47 @@
+[
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "title": "Dune",
+      "year": 1965,
+      "author": "Frank Herbert"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "title": "Ender's Game",
+      "year": 1985,
+      "author": "Orson Scott Card"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+      "title": "1984",
+      "year": 1949,
+      "author": "George Orwell"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+      "title": "Fahrenheit 451",
+      "year": 1953,
+      "author": "Ray Bradbury"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 5,
+    "fields": {
+      "title": "Brave New World",
+      "year": 1932,
+      "author": "Aldous Huxley"
+    }
+  }
+]
