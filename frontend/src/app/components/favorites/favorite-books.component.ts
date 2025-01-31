@@ -54,9 +54,9 @@ import { Book, BookList } from '../../types';
       </div>
     </div>
   `,
-  styleUrls: ['./book-lists.component.scss'],
+  styleUrls: ['./favorite-books.component.scss'],
 })
-export class BookListsComponent {
+export class FavoriteBooksComponent {
   booksService = inject(BooksService);
   newListName = '';
   selectedBooks: Record<number, string> = {};
