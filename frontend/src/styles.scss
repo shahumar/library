@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// Custom styles for snackbar notifications
+.success-snackbar {
+  background-color: #28a745; // Green for success
+  color: white;
+  border-left: 5px solid #218838; // Add a left border for emphasis
+}
+
+.error-snackbar {
+  background-color: #dc3545; // Red for error
+  color: white;
+  border-left: 5px solid #c82333; // Add a left border for emphasis
+}
+
+// Optional: Add animations for snackbar
+.mat-snack-bar-container {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
