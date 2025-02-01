@@ -40,3 +40,10 @@ start server
 python manage.py runserver
 ```
 
+run ruff to fix/format code
+navigate to backend directory
+
+```bash
+ruff check . --fix 
+```
+
