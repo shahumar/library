@@ -31,7 +31,7 @@ export class BooksService {
     );
   }
 
-  private loadBookLists() {
+  loadBookLists() {
     this.http.get<BookList[]>(`${this.apiUrl}/lists/`).subscribe(
       lists => this.bookLists.set(lists)
     );
@@ -119,7 +119,7 @@ export class BooksService {
     return this.http.post(`${this.apiUrl}/lists/${listId}/remove_book/`, { book_id: bookId })
       .subscribe({
         next: () => {
-           this.loadBookLists();
+           this.loadBooks(listId);
            this.notificationService.showSuccess('successfully removed!');
         },
         error: () => {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -56,10 +56,15 @@ import { Book, BookList } from '../../types';
   `,
   styleUrls: ['./favorite-books.component.scss'],
 })
-export class FavoriteBooksComponent {
+export class FavoriteBooksComponent implements OnInit {
   booksService = inject(BooksService);
   newListName = '';
   selectedBooks: Record<number, string> = {};
+
+  ngOnInit(): void {
+    this.booksService.loadAllBooks();
+    this.booksService.loadBookLists()
+  }
 
   availableBooks(list: BookList) {
     return this.booksService.books().filter(
