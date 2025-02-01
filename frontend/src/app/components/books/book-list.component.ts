@@ -94,7 +94,7 @@ export class BookListComponent implements OnInit {
   deleteBook(id: number) {
     if (this.listId != undefined) {
       this.booksService.removeBookFromList(this.listId, id)
-    }{
+    } else {
       this.booksService.deleteBook(id);
     }
 

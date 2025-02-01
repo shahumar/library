@@ -34,7 +34,7 @@ import { Book, BookList } from '../../types';
             </div>
 
             <div class="book-selector">
-              <select [(ngModel)]="selectedBooks[list.id]" class="book-select">
+              <select [ngModel]="getSelectedBook(list.id)" (ngModelChange)="setSelectedBook(list.id, $event)" class="book-select">
                 <option value="">Select a book to add</option>
                 @for (book of availableBooks(list); track book.id) {
                   <option [value]="book.id">{{ book.title }}</option>
@@ -42,7 +42,6 @@ import { Book, BookList } from '../../types';
               </select>
               <button
                 (click)="addBookToList(list.id)"
-                [disabled]="!selectedBooks[list.id]"
                 class="add-button"
               >
                 Add Book
@@ -59,16 +58,18 @@ import { Book, BookList } from '../../types';
 export class FavoriteBooksComponent implements OnInit {
   booksService = inject(BooksService);
   newListName = '';
-  selectedBooks: Record<number, string> = {};
+  selectedBooks = new Map<number, string>();
 
-  ngOnInit(): void {
-    this.booksService.loadAllBooks();
-    this.booksService.loadBookLists()
+  async ngOnInit(): Promise<void> {
+    await Promise.all([
+      this.booksService.loadAllBooks(),
+      this.booksService.loadBookLists()
+    ]);
   }
 
-  availableBooks(list: BookList) {
+  availableBooks(list: BookList): Book[] {
     return this.booksService.books().filter(
-      book => !list.books.find((b: Book) => b.id === book.id)
+      book => !list.books.some((b: Book) => b.id === book.id)
     );
   }
 
@@ -79,15 +80,23 @@ export class FavoriteBooksComponent implements OnInit {
     }
   }
 
+  getSelectedBook(listId: number): string {
+    return this.selectedBooks.get(listId) || '';
+  }
+
+  setSelectedBook(listId: number, bookId: string): void {
+    this.selectedBooks.set(listId, bookId);
+  }
+
   deleteList(id: number) {
     this.booksService.deleteList(id);
   }
 
   addBookToList(listId: number) {
-    const bookId = Number(this.selectedBooks[listId]);
+    const bookId = Number(this.selectedBooks.get(listId));
     if (bookId) {
       this.booksService.addBookToList(listId, bookId);
-      this.selectedBooks[listId] = '';
+      this.selectedBooks.set(listId, '');
     }
   }
 
